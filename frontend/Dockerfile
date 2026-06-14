@@ -17,6 +17,10 @@ RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:1.29-alpine
 
+USER root
+
+RUN apk upgrade --no-cache
+
 COPY --from=builder --chown=101:101 /app/dist /usr/share/nginx/html/momo-store
 
 COPY --chown=101:101 <<'EOF' /etc/nginx/conf.d/default.conf
@@ -45,6 +49,8 @@ server {
     }
 }
 EOF
+
+USER 101
 
 EXPOSE 8080
 

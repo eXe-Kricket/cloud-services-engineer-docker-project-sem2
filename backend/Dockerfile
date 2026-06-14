@@ -16,7 +16,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
 
 FROM alpine:3.22
 
-RUN addgroup -S app && adduser -S -G app -h /app app \
+RUN apk upgrade --no-cache \
+    && addgroup -S app && adduser -S -G app -h /app app \
     && apk add --no-cache ca-certificates \
     && mkdir -p /app/data \
     && chown -R app:app /app
