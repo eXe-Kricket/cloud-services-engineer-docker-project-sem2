@@ -4,7 +4,6 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-ENV NODE_ENV=production
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
 ARG VUE_APP_API_URL=/api
