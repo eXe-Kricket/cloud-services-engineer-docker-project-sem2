@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
 WORKDIR /src
 
@@ -14,7 +14,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -o /out/momo-backend \
     ./cmd/api
 
-FROM alpine:3.20
+FROM alpine:3.22
 
 RUN addgroup -S app && adduser -S -G app -h /app app \
     && apk add --no-cache ca-certificates \

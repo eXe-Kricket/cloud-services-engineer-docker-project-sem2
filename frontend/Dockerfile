@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:1.27-alpine
+FROM nginxinc/nginx-unprivileged:1.29-alpine
 
 COPY --from=builder --chown=101:101 /app/dist /usr/share/nginx/html/momo-store
 
